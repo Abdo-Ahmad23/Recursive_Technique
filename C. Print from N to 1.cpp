@@ -15,6 +15,7 @@ int main(){
     for(auto it:a){
         ans.clear();
         rec(it);
+        reverse(ans.begin(),ans.end());
         for(auto itt:ans)
             cout<<itt<<' ';
         cout<<endl;

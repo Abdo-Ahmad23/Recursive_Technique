@@ -1,37 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
-int n,q,l,r;
-vector<int>a;
-void bs(int target,int mid){
-    if(l>r)
-    {
-        cout<<-1<<endl;
-        return;
-    }
-    
-    if(a[mid]==target){
-        cout<<mid+1<<endl;
-        return;
-    }  
-    else if(a[mid]>target)
-        r=mid-1;
-    else
-        l=mid+1;
-    bs(target,(l+r)>>1);
+const int mod = 1e9+7;
+
+
+long long fPower(long long base,long long power,long long res=1){
+
+    // base case
+    if(power == 0)
+        return res % mod;
+        
+    base %=mod;
+
+    if(power & 1)
+        return fPower((base * base) % mod, power >> 1 ,((res % mod) * base) % mod);
+
+    else 
+        return fPower((base * base) % mod , power >> 1 , res);
+
 }
-int main(){
-    scanf("%d",&n);
-    a.resize(n);
-    for(auto &it:a)
-        scanf("%d",&it);;
+
+int main() {
     
-    scanf("%d",&q);
-    int x;
-    while(q--)
-    {
-        scanf("%d",&x);
-        l=0,r=a.size();
-        bs(x,0);
-    }
+    long long a , b;
+    scanf("%lld %lld", &a , &b);
+    long long res = fPower(a , b);
+    printf("%lld\n", res);
     return 0;
 }
